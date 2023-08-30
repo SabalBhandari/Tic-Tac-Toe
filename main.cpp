@@ -95,19 +95,42 @@ void board(){
     cout<<"     |       |     "<<endl;
 
 }
+void checkDraw(int move){
+    
+    if (move>=9){
+
+        cout<<"DRAW!"<<endl;
+        exit(0);
+
+    }
+    
+}
 
 int main(){
 
     board();
     int ch,i =0;
+    int moveCounter = 0;
     //  checkWin()== 0
     while (i<=5)
     {
+        top:
+        system("cls");
         board();
         cout<<"Player1:";
         cin>>ch;
-        square[ch-1] = 'X';
+        if (square[ch-1]!= 'X' && square[ch-1]!='O')
+        {
+
+            square[ch-1] = 'X';
+            
+        }
+        else{
+            goto top;
+        }
+        moveCounter++;
         board();
+        checkDraw(moveCounter);
         if (checkWin()>=0)
         {
             winner_check(square[checkWin()]);
@@ -123,10 +146,25 @@ int main(){
             }
         }
         
+        top2:
+        system("cls");
+        board();
         cout<<"Player2:";
         cin>>ch;
-        square[ch-1] = 'O';
+        if (square[ch-1]!= 'X' && square[ch-1]!='O')
+        {
+            
+            square[ch-1] = 'O';
+            
+        }
+        else{
+
+            goto top2;
+
+        }
+        moveCounter++;
         board();
+        checkDraw(moveCounter);
         if (checkWin()>=0)
         {
             winner_check(square[checkWin()]);
